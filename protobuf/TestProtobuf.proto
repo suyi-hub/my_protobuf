@@ -1,0 +1,26 @@
+syntax ="proto3";
+
+option go_package ="github.com/suyi-hub/my_protobuf";
+
+//定义服务
+service HelloService{
+  //rpc 服务的函数名 （传入参数）返回（返回参数）
+  //传入参数和返回参数都是消息
+  rpc SayHello(HelloRequest)returns(HelloRespond){};//打招呼
+  rpc SayName(NameRequest)returns(NameRespond){}; //说名字
+
+}
+//客户端发送给服务器
+message HelloRequest{
+  string name=1;
+}
+//服务端返回给客户端
+message HelloRespond{
+  string msg=1;
+}
+message NameRequest{
+  string name=1;
+}
+message NameRespond{
+  string msg=1;
+}

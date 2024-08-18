@@ -1,0 +1,41 @@
+syntax ="proto3";
+
+//生成的包放哪里
+option go_package = "github.com/suyi-hub/my_protobuf";
+
+//熊猫消息结构体
+message PandaRequest{
+  //名字
+  string name =1;
+  //身高
+  int32  high=2;
+  //体重
+  repeated int32 weight =3;
+}
+
+message PandaRespond{
+  //错误号
+  int32 error =1;
+  //错误详情
+  string error_msg=2;
+
+}
+
+//定义服务
+service SearchService{
+  //rpc 服务的函数名 （传入参数）返回（返回参数）
+  //传入参数和返回参数都是消息
+  rpc Search(PandaRequest)returns(PandaRespond);
+
+}
+
+//protoc --proto_path=D:\GOproject\src\studyProtobuf\protobuf --go_out=./ D:\GOproject\src\studyProtobuf\protobuf\PandaRequest.proto
+//这个选项指定了 protoc 应该在哪里查找 .proto 文件。
+//这个选项告诉 protoc 生成 Go 语言的源代码
+
+// --proto_path=i
+//https://github.com/golang/protobuf
+//https://github.com/protocolbuffers/protobuf/releases
+//编写grpc要加插件
+//protoc --proto_path=D:\GOproject\src\studyProtobuf\protobuf --go_out=plugins=grpc:./ D:\GOproject\src\studyProtobuf\protobuf\TestProtobuf.proto
+//go get google.golang.org/grpc
